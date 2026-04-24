@@ -3,25 +3,73 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About</title>
-</head>
-<head>
-  <meta charset="utf-8" />
-
+  <title>Project - Fact Generator</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My App</title>
-
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header><a href="index.html">Home</a></header>
   <main>
-    <h2>About</h2>
-    <p>STOP LOOKING HERE. Else i shall punch you. grrr. .</p>
+    <h2>Welcome to the fact generator!!</h2>
+    <p>See that new fact generator? Click it. Get started. NOW!!!</p>
+    
+    <div class="text-display empty" id="textDisplay">
+      Click me for a free fact :)
+    </div>
+
+    <div class="button-container">
+      <button class="generate-btn" onclick="generateText()">Generate</button>
+      <button class="yes-btn" onclick="handleResponse('yes')">yes!!</button>
+      <button class="no-btn" onclick="handleResponse('no')">no</button>
+    </div>
+
+    <div class="response" id="response"></div>
   </main>
+
+<script>
+        const randomTexts = [
+            "The airbus A380 is technically the saftest aircraft, with no crashes (atlthough.. theyre relativley new.)",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+            "Octopuses have three hearts. Two pump blood to the gills, while the third pumps it to the rest of the body.",
+            "Hack club is the best club in the world!",
+            "The Eiffel Tower can be 15 cm taller during the summer due to thermal expansion of the metal.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "All hail Adedayo.",
+            "Sharks have been around for over 400 million years, making them older than dinosaurs. L L L L L",
+            "The longest recorded flight of a chicken is 13 seconds. FAKE BIRD.",
+            "Wombat poop is cube-shaped, which helps prevent it from rolling away and allows wombats to mark their territory effectively. B R I C K S"
+        ];
+
+        let currentText = "";
+
+        function generateText() {
+            const randomIndex = Math.floor(Math.random() * randomTexts.length);
+            currentText = randomTexts[randomIndex];
+            const textDisplay = document.getElementById('textDisplay');
+            textDisplay.textContent = currentText;
+            textDisplay.classList.remove('empty');
+            document.getElementById('response').textContent = '';
+        }
+
+        function handleResponse(answer) {
+            const responseDiv = document.getElementById('response');
+            
+            if (!currentText) {
+                responseDiv.textContent = "Generate some text first!";
+                responseDiv.className = 'response neutral';
+                return;
+            }
+
+            if (answer === 'yes') {
+                responseDiv.textContent = "YAYYYY!";
+                responseDiv.className = 'response yes';
+            } else if (answer === 'no') {
+                responseDiv.textContent = "HIT THAT BUTTON AGAIN!!! No worries! Try generating another one.";
+                responseDiv.className = 'response no';
+            }
+        }
+    </script>
 </body>
 </html>
